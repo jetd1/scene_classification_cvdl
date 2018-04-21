@@ -52,9 +52,3 @@ Will be released after HW01 submission
 
 
 
-# Xiaoshuai 'Jet' Zhang, jet@pku.edu.cn
-# HW01 for CVDL course of PKU
-
-
-
-

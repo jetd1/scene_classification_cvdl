@@ -1,3 +1,5 @@
+A deep-based model for 80-class scene classification. This is HW01 for CVDL course of PKU. The report is at `./report`.
+
 ## Dependencies
 
 python (>= 3.5), with
@@ -49,7 +51,5 @@ test/012087.jpg 49 58 50
 ## Training
 
 Will be released after HW01 submission
-
-
 
 

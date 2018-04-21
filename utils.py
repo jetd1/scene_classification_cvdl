@@ -55,7 +55,6 @@ def idx2name(idx):
         with open('./scene_classes.csv', 'r') as csv_file:
             reader = csv.reader(csv_file)
             _class_csv = {int(row[0]): row[1] for row in reader}
-
     return _class_csv[idx]
 
 class NamedImageDataset(torch.utils.data.Dataset):

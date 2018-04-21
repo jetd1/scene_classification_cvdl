@@ -37,12 +37,12 @@ def RunSingleTest(net):
     if args.tencrop:
         bs, ncrops, c, h, w = img.size()
         img = img.view(-1, c, h, w)
-    
+   
     ret = net(img)
 
     if args.tencrop:
         ret = ret.view(bs, ncrops, -1).mean(1)
-
+    
     _, p3 = torch.topk(ret, 3)
     p3 = p3.view(-1).cpu().data.numpy()
     
@@ -50,7 +50,6 @@ def RunSingleTest(net):
     for i in range(3):
         print(utils.idx2name(p3[i]), float(ret[0, p3[i]]), sep='\t')
 
-    
 
 def RunWholeTest(net):
     test_set = utils.NamedImageDataset(args.input_dir)
@@ -77,6 +76,9 @@ def RunWholeTest(net):
 if __name__ == '__main__':
     import model
     densenet = model.get(args.checkpoint, not args.cpu, args.parallel)
+
+    # !!! Crucial
+    densenet.eval()
 
     if args.single is not None:
         RunSingleTest(densenet)

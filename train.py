@@ -1,3 +1,7 @@
+# Skeleton code
+# Xiaoshuai 'Jet' Zhang, jet@pku.edu.cn
+# HW01 for CVDL course of PKU
+
 def TrainNet(net, cri, opt, cp_dir, epoch_range, t_loader, v_loader, cuda=True):
     ensure_exists(cp_dir)
     fout = open(os.path.join(cp_dir,'train.log'),'a')

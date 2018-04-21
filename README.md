@@ -1,20 +1,15 @@
-## Requirements
+## Dependencies
 
-python >= 3.5, with
+python (>= 3.5), with
 
-PIL,
-
-tqdm,
-
-pytorch,
-
-torchvision.
-
-
+- PIL (>= 4.1.1),
+- tqdm (>= 4.23.0),
+- pytorch (>= 0.3.0),
+- torchvision (>= 0.2.0).
 
 ## Testing
 
-There's already a trained weight file under `./checkpoints/`, it reaches accuracy of 83.2% and top-3 accuracy of 95.4%.
+A trained weight file is under `./checkpoints`, which reaches 83.2% acc and 95.4% top-3 acc on validation set.
 
 #### Single Image Testing
 
@@ -35,7 +30,7 @@ python test.py -c [CHECKPOINT_PATH] -i [IMAGE_DIR] -o [OUTPUT_FILE]
 The output file will be in the format of:
 
 ```
-#filename       #Top-3 classes
+# Filename      # Top-3 classes
 test/051247.jpg 15 11 4
 test/012087.jpg 49 58 50
 ...
@@ -44,7 +39,7 @@ test/012087.jpg 49 58 50
 #### Addictional Options
 
 ```
---cpu             Test on CPUs rather than GPUs
+--cpu             Test on CPUs rather than on GPUs
 --parallel, -p    Run batches parallel (using nn.DataParallel)
 --tenctop, -t     Run tencrop test
 ```
@@ -53,7 +48,13 @@ test/012087.jpg 49 58 50
 
 ## Training
 
-Will be release after HW01 submission
+Will be released after HW01 submission
+
+
+
+# Xiaoshuai 'Jet' Zhang, jet@pku.edu.cn
+# HW01 for CVDL course of PKU
+
 
 
 

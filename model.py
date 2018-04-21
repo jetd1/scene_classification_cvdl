@@ -1,3 +1,6 @@
+# Xiaoshuai 'Jet' Zhang, jet@pku.edu.cn
+# HW01 for CVDL course of PKU
+
 import torch
 import torch.nn as nn
 import torchvision as tv

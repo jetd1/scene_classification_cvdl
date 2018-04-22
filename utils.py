@@ -7,6 +7,7 @@ import sys
 import csv
 from tqdm import tqdm
 import PIL.Image as im
+import torch.utils.data
 from torch.autograd import Variable as var
 
 _class_csv = None

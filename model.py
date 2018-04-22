@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torchvision as tv
 
-def get(checkpoint=None, cuda=True, parallel=False):
+def getDenseNet(checkpoint=None, cuda=True, parallel=False):
     densenet = tv.models.densenet161(pretrained=False)
     del densenet.classifier
     densenet.classifier = nn.Linear(in_features=2208, out_features=80)
@@ -13,7 +13,8 @@ def get(checkpoint=None, cuda=True, parallel=False):
     if checkpoint is not None:
         densenet.load_state_dict(torch.load(checkpoint))
     else:
-        print('Warning: Using unintialized DenseNet')
+        print('Using pretrained DenseNet...')
+        densenet.load_state_dict(torch.load('./checkpoints/place80.pth'))
 
     if parallel:
         densenet = nn.DataParallel(densenet)

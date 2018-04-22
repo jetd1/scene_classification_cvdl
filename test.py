@@ -2,6 +2,7 @@
 # HW01 for CVDL course of PKU
 
 import torch
+from torch import nn
 import torchvision as tv
 from torch.autograd import Variable as var
 import argparse
@@ -48,6 +49,7 @@ def RunSingleTest(net):
     
     _, p3 = torch.topk(ret, 3)
     p3 = p3.view(-1).cpu().data.numpy()
+    ret = nn.functional.softmax(ret, dim=1)
     
     print('Top-3 predictions:')
     for i in range(3):
@@ -78,12 +80,13 @@ def RunWholeTest(net):
 
 if __name__ == '__main__':
     import model
-    densenet = model.get(args.checkpoint, not args.cpu, args.parallel)
+    net = model.getDenseNet(args.checkpoint, not args.cpu, args.parallel)
 
     # !!! Crucial
-    densenet.eval()
+    net.eval()
 
     if args.single is not None:
-        RunSingleTest(densenet)
+        RunSingleTest(net)
     else:
-        RunWholeTest(densenet)
+        RunWholeTest(net)
+

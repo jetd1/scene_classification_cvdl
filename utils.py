@@ -5,6 +5,7 @@ import torch
 import os
 import sys
 import csv
+from torch import nn
 from tqdm import tqdm
 import PIL.Image as im
 import torch.utils.data
@@ -47,6 +48,15 @@ def WritePred(net, t_loader, filename, cuda=True, tencrop=False, out_arr=None):
             if out_arr is not None:
                 out_arr.append([p3[0], p3[1], p3[2]])
             idx += 1
+
+def WriteSinglePred(ret, f):
+    _, p3 = torch.topk(ret, 3)
+    p3 = p3.view(-1).cpu().data.numpy()
+    ret = nn.functional.softmax(ret, dim=1)
+
+    print('Top-3 predictions:', file=f)
+    for i in range(3):
+        print(idx2name(p3[i]), float(ret[0, p3[i]]), sep='\t', file=f)
     
 def ReadJson(f):
     with open(f, 'r', newline='') as json_file:

@@ -2,12 +2,13 @@
 # HW01 for CVDL course of PKU
 
 import torch
-from torch import nn
 import torchvision as tv
 from torch.autograd import Variable as var
 import argparse
 import PIL.Image as im
+import sys
 import utils
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--single', '-s')
@@ -46,15 +47,12 @@ def RunSingleTest(net):
 
     if args.tencrop:
         ret = ret.view(bs, ncrops, -1).mean(1)
-    
-    _, p3 = torch.topk(ret, 3)
-    p3 = p3.view(-1).cpu().data.numpy()
-    ret = nn.functional.softmax(ret, dim=1)
-    
-    print('Top-3 predictions:')
-    for i in range(3):
-        print(utils.idx2name(p3[i]), float(ret[0, p3[i]]), sep='\t')
 
+    utils.WriteSinglePred(ret, sys.stdout)
+    
+    if args.output_file is not None:
+        with open(args.output_file, 'w') as f:
+            utils.WriteSinglePred(ret, f)
 
 def RunWholeTest(net):
     test_set = utils.NamedImageDataset(args.input_dir)

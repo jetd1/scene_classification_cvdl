@@ -18,6 +18,7 @@ parser.add_argument('--tencrop', '-t', action='store_true')
 parser.add_argument('--input_dir', '-i')
 parser.add_argument('--output_file', '-o')
 parser.add_argument('--checkpoint', '-c')
+parser.add_argument('--csv', default='./scene_classes.csv')
 
 args = parser.parse_args()
 
@@ -48,11 +49,11 @@ def RunSingleTest(net):
     if args.tencrop:
         ret = ret.view(bs, ncrops, -1).mean(1)
 
-    utils.WriteSinglePred(ret, sys.stdout)
+    utils.WriteSinglePred(ret, sys.stdout, args.csv)
     
     if args.output_file is not None:
         with open(args.output_file, 'w') as f:
-            utils.WriteSinglePred(ret, f)
+            utils.WriteSinglePred(ret, f, args.csv)
 
 def RunWholeTest(net):
     test_set = utils.NamedImageDataset(args.input_dir)

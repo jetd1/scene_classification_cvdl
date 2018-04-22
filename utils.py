@@ -49,24 +49,24 @@ def WritePred(net, t_loader, filename, cuda=True, tencrop=False, out_arr=None):
                 out_arr.append([p3[0], p3[1], p3[2]])
             idx += 1
 
-def WriteSinglePred(ret, f):
+def WriteSinglePred(ret, f, class_csv):
     _, p3 = torch.topk(ret, 3)
     p3 = p3.view(-1).cpu().data.numpy()
     ret = nn.functional.softmax(ret, dim=1)
 
     print('Top-3 predictions:', file=f)
     for i in range(3):
-        print(idx2name(p3[i]), float(ret[0, p3[i]]), sep='\t', file=f)
+        print(idx2name(p3[i], class_csv), float(ret[0, p3[i]]), sep='\t', file=f)
     
 def ReadJson(f):
     with open(f, 'r', newline='') as json_file:
         js_dict = json.load(json_file)
         return {i['image_id']: int(i['label_id']) for i in js_dict}
 
-def idx2name(idx):
+def idx2name(idx, class_csv):
     global _class_csv
     if _class_csv is None:
-        with open('./scene_classes.csv', 'r') as csv_file:
+        with open(class_csv, 'r') as csv_file:
             reader = csv.reader(csv_file)
             _class_csv = {int(row[0]): row[1] for row in reader}
     return _class_csv[idx]

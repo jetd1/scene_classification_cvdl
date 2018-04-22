@@ -1,5 +1,13 @@
 A deep-based model for 80-class scene classification. This is HW01 for CVDL course of PKU. The report is at `./report`. You can test online [here](http://s.buriedjet.com/cvdl1/).
 
+This repo uses Git LFS in order to upload checkpoints. So you should clone using:
+
+```c
+git lfs clone https://github.com/BuriedJet/scene_classification_cvdl.git
+```
+
+rather than normal `git clone`. You may need to install [Git LFS](https://git-lfs.github.com/) first (or the weights can be downloaded from [here](http://s.buriedjet.com/filehost/place80.pth))
+
 ## Dependencies
 
 python (>= 3.5), with

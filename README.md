@@ -51,7 +51,7 @@ test/012087.jpg 49 58 50
 ```
 --cpu             Test on CPUs rather than on GPUs
 --parallel, -p    Run batches parallel (using nn.DataParallel)
---tenctop, -t     Run tencrop test
+--tencrop, -t     Run tencrop test
 ```
 
 

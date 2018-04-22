@@ -1,4 +1,4 @@
-A deep-based model for 80-class scene classification. This is HW01 for CVDL course of PKU. The report is at `./report`.
+A deep-based model for 80-class scene classification. This is HW01 for CVDL course of PKU. The report is at `./report`. You can test online [here](http://s.buriedjet.com/cvdl1/).
 
 ## Dependencies
 

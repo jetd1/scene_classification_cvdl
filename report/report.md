@@ -68,6 +68,8 @@ The model have achieved pretty good performance, but there're still limitations:
 
 ### 6. Notes for the Codes
 
+You can test online [here](http://s.buriedjet.com/cvdl1/).
+
 #### Dependencies
 
 python (>= 3.5), with

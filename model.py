@@ -13,12 +13,12 @@ def getDenseNet(checkpoint, cuda=True, parallel=False):
     if checkpoint == './checkpoints/place80.pth':
         print('Using pretrained DenseNet...')
     state_dict = torch.load(checkpoint)
-    
+
     try:
         densenet.load_state_dict(state_dict)
     except:
         import collections
-        nstate_dict = collections.OrderedDict
+        nstate_dict = collections.OrderedDict()
         for k in state_dict:
             idx = k[:k.rfind('.')].rfind('.')
             nk = k[:idx] + k[idx+1:]

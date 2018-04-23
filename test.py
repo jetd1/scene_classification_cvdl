@@ -38,7 +38,7 @@ def RunSingleTest(net):
     img = var(img.view(1, *img.shape))
     
     if not args.cpu:
-        img.cuda()
+        img = img.cuda()
 
     if args.tencrop:
         bs, ncrops, c, h, w = img.size()

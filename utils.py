@@ -35,7 +35,7 @@ def WritePred(net, t_loader, filename, cuda=True, tencrop=False, out_arr=None):
         for data in tqdm(t_loader, file=sys.stdout):
             in_img = var(data)
             if cuda:
-                in_img.cuda()
+                in_img = in_img.cuda()
             if tencrop:
                 bs, ncrops, c, h, w = in_img.size()
                 in_img = in_img.view(-1, c, h, w)                

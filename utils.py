@@ -66,7 +66,7 @@ def ReadJson(f):
 def idx2name(idx, class_csv):
     global _class_csv
     if _class_csv is None:
-        with open(class_csv, 'r') as csv_file:
+        with open(class_csv, 'r', encoding='utf8') as csv_file:
             reader = csv.reader(csv_file)
             _class_csv = {int(row[0]): row[1] for row in reader}
     return _class_csv[idx]

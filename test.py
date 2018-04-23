@@ -17,7 +17,7 @@ parser.add_argument('--parallel', '-p', action='store_true')
 parser.add_argument('--tencrop', '-t', action='store_true')
 parser.add_argument('--input_dir', '-i')
 parser.add_argument('--output_file', '-o')
-parser.add_argument('--checkpoint', '-c')
+parser.add_argument('--checkpoint', '-c', default='./checkpoints/place80.pth')
 parser.add_argument('--csv', default='./scene_classes.csv')
 
 args = parser.parse_args()

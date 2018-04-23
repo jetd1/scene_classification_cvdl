@@ -5,16 +5,25 @@ import torch
 import torch.nn as nn
 import torchvision as tv
 
-def getDenseNet(checkpoint=None, cuda=True, parallel=False):
+def getDenseNet(checkpoint, cuda=True, parallel=False):
     densenet = tv.models.densenet161(pretrained=False)
     del densenet.classifier
     densenet.classifier = nn.Linear(in_features=2208, out_features=80)
 
-    if checkpoint is not None:
-        densenet.load_state_dict(torch.load(checkpoint))
-    else:
+    if checkpoint == './checkpoints/place80.pth':
         print('Using pretrained DenseNet...')
-        densenet.load_state_dict(torch.load('./checkpoints/place80.pth'))
+    state_dict = torch.load(checkpoint)
+    
+    try:
+        densenet.load_state_dict(state_dict)
+    except:
+        import collections
+        nstate_dict = collections.OrderedDict
+        for k in state_dict:
+            idx = k[:k.rfind('.')].rfind('.')
+            nk = k[:idx] + k[idx+1:]
+            nstate_dict[nk] = state_dict[k]
+        densenet.load_state_dict(state_dict)
 
     if parallel:
         densenet = nn.DataParallel(densenet)

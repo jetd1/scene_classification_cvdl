@@ -14,16 +14,18 @@ def getDenseNet(checkpoint, cuda=True, parallel=False):
         print('Using pretrained DenseNet...')
     state_dict = torch.load(checkpoint)
 
+    # Hack for newer pytorch and torchvision
     try:
         densenet.load_state_dict(state_dict)
     except:
         import collections
         nstate_dict = collections.OrderedDict()
         for k in state_dict:
-            idx = k[:k.rfind('.')].rfind('.')
-            nk = k[:idx] + k[idx+1:]
-            nstate_dict[nk] = state_dict[k]
-        densenet.load_state_dict(state_dict)
+            if k.count('.') > 3:
+                idx = k[:k.rfind('.')].rfind('.')
+                nk = k[:idx] + k[idx+1:]
+                nstate_dict[nk] = state_dict[k]
+        densenet.load_state_dict(nstate_dict)
 
     if parallel:
         densenet = nn.DataParallel(densenet)

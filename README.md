@@ -14,8 +14,10 @@ python (>= 3.5), with
 
 - PIL (>= 4.1.1),
 - tqdm (>= 4.23.0),
-- pytorch (>= 0.3.0),
-- torchvision (>= 0.2.0).
+- pytorch (== 0.3.0, 0.3.1),
+- torchvision (== 0.2.0).
+
+The predefined DenseNet is modified in newer pytorch and torchvision, so the code will not work with them. I'll hack on this soon...
 
 ## Testing
 
